@@ -1,0 +1,3 @@
+export const ADD_PROPERTY = "ADD_PROPERTY";
+export const EDIT_PROPERTY = "EDIT_PROPERTY";
+export const DELETE_PROPERTY = "DELETE_PROPERTY";
