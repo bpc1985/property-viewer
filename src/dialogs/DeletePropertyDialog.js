@@ -1,19 +1,25 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useSnackbar } from "notistack";
 import { Button, DialogContent, DialogActions } from "@material-ui/core";
 import DialogTitle from "components/DialogTitle";
 import { deleteProperty } from "redux/actions";
 
 const DeletePropertyDialog = ({ onCancel, idx }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const selectedProperty = useSelector((state) =>
     state.properties.find((p) => p.id === idx)
   );
 
-  const handleDelete = useCallback(() => {
+  const handleDelete = () => {
     dispatch(deleteProperty(idx));
+    enqueueSnackbar(
+      `Property ${selectedProperty?.name} has been deleted successfully`,
+      { variant: "error" }
+    );
     onCancel();
-  }, [onCancel, dispatch, idx]);
+  };
 
   return (
     <>
