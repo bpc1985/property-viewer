@@ -1,84 +1,63 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { useTable, useExpanded } from "react-table";
+import { useDialog } from "hooks/useDialog";
 
-import {
-  Grid,
-  Button,
-  CssBaseline,
-  Table as MaUTable,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
-
-const RowSubComponent = ({ row }) => (
-  <Grid container spacing={1}>
-    <Grid item xs={2}>
-      <Grid container>
-        <pre>
-          <code>{JSON.stringify(row.original)}</code>
-        </pre>
-      </Grid>
-    </Grid>
-  </Grid>
-);
-
-const Table = ({ columns, data }) => {
-  const { getTableProps, headerGroups, rows, prepareRow, visibleColumns } =
-    useTable(
-      {
-        columns,
-        data,
-      },
-      useExpanded
-    );
-
-  return (
-    <MaUTable {...getTableProps()}>
-      <TableHead>
-        {headerGroups.map((headerGroup) => (
-          <TableRow {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <TableCell {...column.getHeaderProps()}>
-                {column.render("Header")}
-              </TableCell>
-            ))}
-          </TableRow>
-        ))}
-      </TableHead>
-      <TableBody>
-        {rows.map((row, i) => {
-          prepareRow(row);
-          return (
-            <>
-              <TableRow {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <TableCell {...cell.getCellProps()}>
-                      {cell.render("Cell")}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-              {row.isExpanded && (
-                <TableRow>
-                  <TableCell colSpan={visibleColumns.length}>
-                    <RowSubComponent row={row} />
-                  </TableCell>
-                </TableRow>
-              )}
-            </>
-          );
-        })}
-      </TableBody>
-    </MaUTable>
-  );
-};
+import { CssBaseline } from "@material-ui/core";
+import PropertyTable from "components/PropertyTable";
+import ActionButtons from "components/ActionButtons";
 
 const PropertyList = () => {
+  const dialog = useDialog();
   const data = useSelector((state) => state.properties);
+
+  const onView = useCallback(
+    (idx) => {
+      dialog({
+        componentName: "ViewPropertyDialog",
+        useForm: true,
+        dialogProps: {
+          maxWidth: "lg",
+        },
+        contentProps: {
+          idx,
+        },
+      });
+    },
+    [dialog]
+  );
+
+  const onEdit = useCallback(
+    (idx) => {
+      dialog({
+        componentName: "AddEditPropertyDialog",
+        useForm: true,
+        dialogProps: {
+          maxWidth: "lg",
+        },
+        contentProps: {
+          idx,
+        },
+      });
+    },
+    [dialog]
+  );
+
+  const onDelete = useCallback(
+    (idx) => {
+      dialog({
+        componentName: "DeletePropertyDialog",
+        useForm: true,
+        dialogProps: {
+          maxWidth: "lg",
+        },
+        contentProps: {
+          idx,
+        },
+      });
+    },
+    [dialog]
+  );
+
   const columns = useMemo(
     () => [
       {
@@ -109,38 +88,23 @@ const PropertyList = () => {
       {
         Header: "Actions",
         accessor: "actions",
-        Cell: ({ row }) => {
-          // const rowIdx = row.id;
-          return (
-            <div>
-              <Button
-                size="small"
-                variant="contained"
-                color="primary"
-                onClick={() => console.log("Edit Property")}
-              >
-                Edit
-              </Button>
-              <Button
-                size="small"
-                variant="contained"
-                color="secondary"
-                onClick={() => console.log("Delete Property")}
-              >
-                Delete
-              </Button>
-            </div>
-          );
-        },
+        Cell: ({ row }) => (
+          <ActionButtons
+            idx={row.original.id}
+            onView={onView}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
+        ),
       },
     ],
-    []
+    [onView, onEdit, onDelete]
   );
 
   return (
     <div>
       <CssBaseline />
-      <Table columns={columns} data={data} />
+      <PropertyTable columns={columns} data={data} />
     </div>
   );
 };

@@ -1,6 +1,8 @@
+import { v4 as uuidv4 } from "uuid";
+
 const mockData = [
   {
-    id: 0,
+    id: uuidv4(),
     name: "Own House",
     street: "Maapadontie",
     number: "5",
@@ -9,14 +11,10 @@ const mockData = [
     municipality: "Uusimaa",
     country: "Finland",
     description: "My house",
-    geometry: {
-      lon: -0.16030636023550826,
-      lat: 51.52016005,
-    },
-    coordinates: [-0.16030636023550826, 51.52016005],
+    coordinates: [24.947417031490737, 60.23171135],
   },
   {
-    id: 1,
+    id: uuidv4(),
     name: "Diamond",
     street: "Santa Fe",
     number: "40",
@@ -25,10 +23,6 @@ const mockData = [
     municipality: "California",
     country: "United States",
     description: "Diamond property",
-    geometry: {
-      lon: -122.40110929789842,
-      lat: 37.73416985,
-    },
     coordinates: [-122.40110929789842, 37.73416985],
   },
 ];

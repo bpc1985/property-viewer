@@ -1,3 +1,5 @@
+import { DialogProvider } from "hooks/useDialog";
+import PropertyTitle from "components/PropertyTitle";
 import PropertyList from "components/PropertyList";
 
 import "./App.css";
@@ -5,7 +7,10 @@ import "./App.css";
 const App = () => {
   return (
     <div className="container">
-      <PropertyList />
+      <DialogProvider>
+        <PropertyTitle />
+        <PropertyList />
+      </DialogProvider>
     </div>
   );
 };
