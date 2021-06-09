@@ -25,6 +25,18 @@ const mockData = [
     description: "Diamond property",
     coordinates: [-122.40110929789842, 37.73416985],
   },
+  {
+    id: uuidv4(),
+    name: "Arwaa Mansion",
+    street: "Nassim Road",
+    number: "48",
+    postalCode: "258433",
+    city: "Singapore",
+    municipality: "Singapore",
+    country: "Singapore",
+    description: "The owner is Brunei's Prince Jefri Bolkiah",
+    coordinates: [103.820541, 1.313232],
+  },
 ];
 
 export default mockData;

@@ -14,22 +14,20 @@ const _defaultOptions = {
   styles: {},
 };
 
-const DialogProvider = ({ children, defaultOptions = {} }) => {
+const DialogProvider = ({ children }) => {
   const [options, setOptions] = useState({
     confirmationText: "OK",
     cancellationText: "Cancel",
     ..._defaultOptions,
-    ...defaultOptions,
   });
   const [resolveReject, setResolveReject] = useState([]);
 
   const dialog = useCallback(
     (opts = {}) =>
       new Promise((resolve, reject) => {
-        setOptions({ ..._defaultOptions, ...defaultOptions, ...opts });
+        setOptions({ ..._defaultOptions, ...opts });
         setResolveReject([resolve, reject]);
       }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
