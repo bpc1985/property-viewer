@@ -49,7 +49,9 @@ const AddEditPropertyDialog = ({ onCancel, idx }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <DialogTitle onClose={onCancel}>Edit Property</DialogTitle>
+      <DialogTitle onClose={onCancel}>
+        {isEmpty(idx) ? "Add" : "Edit"} Property
+      </DialogTitle>
       <DialogContent>
         <PropertyForm control={control} onCancel={onCancel} />
       </DialogContent>
