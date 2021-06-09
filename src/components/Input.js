@@ -6,7 +6,6 @@ const Input = ({ control, name, ...rest }) => {
     <Controller
       name={name}
       control={control}
-      defaultValue=""
       render={({ field: { onChange, value }, fieldState: { error } }) => (
         <TextField
           label="First Name"

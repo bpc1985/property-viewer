@@ -20,6 +20,14 @@ const generateUrlEndPoint = ({
 };
 
 export async function getApiEncoding(property) {
-  const response = await axios.get(generateUrlEndPoint(property));
-  return response.data.features[0]?.geometry.coordinates || DEFAULT_COORDINATE;
+  try {
+    const response = await axios.get(generateUrlEndPoint(property));
+    return (
+      response.data.features[0]?.geometry.coordinates || DEFAULT_COORDINATE
+    );
+  } catch (e) {
+    // return default coordinate if having exception error
+    console.log("Error: ", e);
+    return DEFAULT_COORDINATE;
+  }
 }
