@@ -15,19 +15,19 @@ Clone down this repository. You will need `node` and `npm` installed globally on
 
 Installation:
 
-`npm install`
+`npm install` or  `yarn install`
 
 To Run Test Suite:
 
-`npm test`
+`npm test` or `yarn test`
 
 To Start Server:
 
-`npm start`
+`npm start` or `yarn start`
 
 To Visit App:
 
-`localhost:3000`
+`http://localhost:3000`
 
 ## WebApp structure
 
