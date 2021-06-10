@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -29,4 +30,11 @@ const DisplayMap = ({ name, address, coordinates }) => {
     </MapContainer>
   );
 };
+
+DisplayMap.propTypes = {
+  name: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  coordinates: PropTypes.array.isRequired,
+};
+
 export default DisplayMap;

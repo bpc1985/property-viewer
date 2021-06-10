@@ -1,6 +1,6 @@
-import Input from "components/Input";
-
+import PropTypes from "prop-types";
 import { Grid, Button, DialogActions } from "@material-ui/core";
+import Input from "components/Input";
 
 const PropertyForm = ({ control, onCancel }) => {
   return (
@@ -82,6 +82,11 @@ const PropertyForm = ({ control, onCancel }) => {
       </Grid>
     </Grid>
   );
+};
+
+PropertyForm.propTypes = {
+  control: PropTypes.object.isRequired,
+  onCancel: PropTypes.func,
 };
 
 export default PropertyForm;

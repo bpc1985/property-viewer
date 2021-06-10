@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { TableCell, TableHead, TableRow } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -22,6 +23,10 @@ const PropertyHeader = ({ headerGroups }) => {
       ))}
     </TableHead>
   );
+};
+
+PropertyHeader.propTypes = {
+  headerGroups: PropTypes.array.isRequired,
 };
 
 export default PropertyHeader;

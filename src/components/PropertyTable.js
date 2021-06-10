@@ -1,5 +1,5 @@
 import { useTable, useExpanded } from "react-table";
-
+import PropTypes from "prop-types";
 import { Table as MaUTable, TableBody } from "@material-ui/core";
 import PropertyHeader from "./PropertyHeader";
 import PropertyRow from "./PropertyRow";
@@ -31,6 +31,11 @@ const PropertyTable = ({ columns, data }) => {
       </TableBody>
     </MaUTable>
   );
+};
+
+PropertyTable.propTypes = {
+  columns: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 export default PropertyTable;

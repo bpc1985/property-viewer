@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button, Grid } from "@material-ui/core";
 
 const ActionButtons = ({ idx, onView, onEdit, onDelete }) => {
@@ -36,6 +37,13 @@ const ActionButtons = ({ idx, onView, onEdit, onDelete }) => {
       </Grid>
     </Grid>
   );
+};
+
+ActionButtons.propTypes = {
+  idx: PropTypes.string,
+  onView: PropTypes.func,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 export default ActionButtons;
