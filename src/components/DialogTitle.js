@@ -36,6 +36,7 @@ const DialogTitle = withStyles(styles)((props) => {
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton
+          data-testid="dialogCloseIcon"
           aria-label="close"
           className={classes.closeButton}
           onClick={onClose}
